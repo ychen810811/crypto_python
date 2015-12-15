@@ -49,7 +49,33 @@ def letter_sorted_per_freq(string):
                     i += 1
     return ''.join(letter_sorted)
 
-    # Yet there is another awkard implementation making use several compound objects
+
+# Yet there is another awkard implementation making use several compound objects
+def letter_sorted_per_freq_2(string):
+    freq_letters = letter_count(string)
+
+    letter_freq = {}
+    for letter in LETTERS:
+        if freq_letters[letter] not in letter_freq:
+            letter_freq[freq_letters[letter]] = [letter]
+        else:
+            letter_freq[freq_letters[letter]].append(letter)
+
+    for freq in letter_freq:
+        letter_freq[freq].sort(key=ETAOIN.find, reverse=True)
+        letter_freq[freq] = ''.join(letter_freq[freq])
+
+    list_freq_string_pairs = list(letter_freq.items())
+    list_freq_string_pairs.sort(key=_return_key_value, reverse=True)
+    list_sorted_strings = []
+    for o in list_freq_string_pairs:
+        list_sorted_strings.append(o[1])
+
+    return ''.join(list_sorted_strings)
+
+
+def _return_key_value(x):
+    return x[0]
 
 
 def freq_match_score(string):
@@ -114,5 +140,6 @@ of May 2012 a private member's bill was before the House of Lords which would
 grant Turing a statutory pardon if enacted."""
 pprint.pprint(letter_count(message))
 pprint.pprint(letter_sorted_per_freq(message))
+pprint.pprint(letter_sorted_per_freq_2(message))
 # pprint.pprint(letter_count(LETTERS))
 # pprint.pprint(letter_sorted_per_freq(LETTERS))
