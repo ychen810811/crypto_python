@@ -11,6 +11,7 @@ FREQ_ENGLISH = {'E': 12.70, 'T': 9.06, 'A': 8.17, 'O': 7.51, 'I':
 1.93, 'B': 1.29, 'V': 0.98, 'K': 0.77, 'J': 0.15, 'X': 0.15, 'Q': 0.10, 'Z':
 0.07}
 
+
 def letter_count(string):
     letter_occurrences = {}
     for c in LETTERS:
