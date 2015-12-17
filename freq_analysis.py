@@ -95,10 +95,9 @@ def freq_match_score(string):
     return match_score
 
 
-
 # below is testing code for in-place test functions/methods
-
-# message = """Adiz Avtzqeci Tmzubb wsa m Pmilqev halpqavtakuoi,
+def main():
+    # message = """Adiz Avtzqeci Tmzubb wsa m Pmilqev halpqavtakuoi,
 # lgouqdaf, kdmktsvmztsl, izr xoexghzr kkusitaaf. Vz wsa twbhdg ubalmmzhdad qz
 # hce vmhsgohuqbo ox kaakulmd gxiwvos, krgdurdny i rcmmstugvtawz ca tzm ocicwxfg
 # jf "stscmilpy" oid "uwydptsbuci" wabt hce Lcdwig eiovdnw. Bgfdny qe kddwtk
@@ -125,7 +124,7 @@ def freq_match_score(string):
 # gv nscadn at ohw Jdwoikp scqejvysit xwd "hce sxboglavs kvy zm ion tjmmhzd." Sa
 # at Haq 2012 i bfdvsbq azmtmd'g widt ion bwnafz tzm Tcpsw wr Zjrva ivdcz eaigd
 # yzmbo Tmzubb a kbmhptgzk dvrvwz wa efiohzd."""
-message = """Alan Mathison Turing was a British mathematician,
+    message = """Alan Mathison Turing was a British mathematician,
 logician, cryptanalyst, and computer scientist. He was highly influential in
 the development of computer science, providing a formalisation of the concepts
 of "algorithm" and "computation" with the Turing machine. Turing is widely
@@ -152,9 +151,13 @@ campaign, British Prime Minister Gordon Brown made an official public apology
 on behalf of the British government for "the appalling way he was treated." As
 of May 2012 a private member's bill was before the House of Lords which would
 grant Turing a statutory pardon if enacted."""
-pprint.pprint(letter_count(message))
-pprint.pprint(letter_sorted_per_freq(message))
-pprint.pprint(letter_sorted_per_freq_2(message))
-pprint.pprint(freq_match_score(message))
-# pprint.pprint(letter_count(LETTERS))
-# pprint.pprint(letter_sorted_per_freq(LETTERS))
+    pprint.pprint(letter_count(message))
+    pprint.pprint(letter_sorted_per_freq(message))
+    pprint.pprint(letter_sorted_per_freq_2(message))
+    pprint.pprint(freq_match_score(message))
+    # pprint.pprint(letter_count(LETTERS))
+    # pprint.pprint(letter_sorted_per_freq(LETTERS))
+
+
+if __name__ == '__main__':
+    main()
