@@ -69,6 +69,26 @@ def _useful_factors(factors):
     return factors[i:len(factors) - j]
 
 
+def _common_factors(factors):
+    factor_count = {}
+    # Step 1: make a dict value of keys of all factors and of values of corresponding repeating count
+    for seq in factors:
+        for factor in factors[seq]:
+            if factor not in factor_count:
+                factor_count[factor] = 1
+            else:
+                factor_count[factor] += 1
+
+    # Step 2: convert the dict value to a list of key-value tuples by the repeating count.
+    factor_count = list(factor_count.items())
+    factor_count.sort(key=_tuple_2nd_element, reverse=True)
+    return factor_count
+
+
+def _tuple_2nd_element(t):
+    return t[1]
+
+
 # Below starts testing code
 def main():
 #     message = """Adiz Avtzqeci Tmzubb wsa m Pmilqev halpqavtakuoi,
@@ -102,8 +122,7 @@ def main():
 raz c vkb qp iwpou."""
     pprint.pprint(_repeated_seq_spacing(message))
     pprint.pprint(_factors(256))
-    pprint.pprint(_factors_1(256))
-    pprint.pprint(_useful_factors(_factors(256)))
+    pprint.pprint(_common_factors({'VRA': [8, 2, 4, 2, 3, 4, 6, 8, 12, 16, 8, 2, 4], 'AZU': [2, 3, 4, 6, 8, 12, 16, 24], 'YBN': [8, 2, 4]}))
 
 
 if __name__ == '__main__':
