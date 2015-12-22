@@ -15,6 +15,36 @@ MAX_KEY_LEN = 16
 MIN_SEQ_FREQ = 4  # will not consider seq's repeating for less than this many of times
 
 
+# Return a list of possible key lengths for given cipher text argument. The key
+# lengths are a list of integers which are decent ordered.
+def kasiski_examine(cipher_text):
+    print('__kasiski_examine_starts__')
+    # Step 1: get the repeated seq spacings.
+    repeated_seq_spacings = _repeated_seq_spacing(cipher_text)
+    pprint.pprint(repeated_seq_spacings)
+
+    # Step 2: find the most common factors of all the spacings
+    # Step 2.1: find the useful factors of each seq
+    seq_spacing_factors = {}
+    for seq in repeated_seq_spacings:
+        if seq not in seq_spacing_factors:
+            seq_spacing_factors[seq] = []
+        for spacing in repeated_seq_spacings[seq]:
+            seq_spacing_factors[seq].extend(_useful_factors(_factors(spacing)))
+    pprint.pprint(seq_spacing_factors)
+
+    # Step 2.2: get a list of tuples composed of factors and their occurrences
+    factor_count = _common_factors(seq_spacing_factors)
+    pprint.pprint(factor_count)
+
+    # Step 3: return the list of possible key lens
+    likely_key_len = []
+    for t in factor_count:
+        likely_key_len.append(t[0])
+    print('__kasiski_examine_ends__')
+    return likely_key_len
+
+
 # Find repeated letter sequences thru the message and return a dict value with
 # keys of the seq's and values of lists of the spacings.
 def _repeated_seq_spacing(message):
@@ -93,6 +123,28 @@ def _tuple_2nd_element(t):
     return t[1]
 
 
+def _vigenere_sub_string(nth, key_len, cipher_text):
+    cipher_text = REGEX_NON_LETTERS.sub('', cipher_text.upper())
+    s = []
+    for i in range(len(cipher_text)):
+        if i % key_len == nth:
+            s.append(cipher_text[i])
+    return ''.join(s)
+
+
+def _attack_with_key_len(key_len, cipher_text):
+    key = []
+    for i in range(key_len):
+        freq_scores = []
+        sub_string = _vigenere_sub_string(i, key_len, cipher_text)
+        print(sub_string)
+        for c in LETTERS:
+            #freq_scores.append((c, freq_analysis.freq_match_score(vigenere_cipher.decrypt(sub_string, c))))
+            print(c + ' %%%%%%%% ' + freq_analysis.letter_sorted_per_freq(vigenere_cipher.decrypt(sub_string, c)))
+        freq_scores.sort(key=_tuple_2nd_element, reverse=True)
+        print(str(i) + ' #### ' + pprint.pformat(freq_scores))
+
+
 # Below starts testing code
 def main():
 #     message = """Adiz Avtzqeci Tmzubb wsa m Pmilqev halpqavtakuoi,
@@ -125,8 +177,10 @@ def main():
     message = """Ppqca xqvekg ybnkmazu ybngbal jon i tszm jyim. Vrag voht vrau c tksg. Ddwuo xitlazu vavv
 raz c vkb qp iwpou."""
     pprint.pprint(_repeated_seq_spacing(message))
-    pprint.pprint(_factors(256))
     pprint.pprint(_common_factors({'VRA': [8, 2, 4, 2, 3, 4, 6, 8, 12, 16, 8, 2, 4], 'AZU': [2, 3, 4, 6, 8, 12, 16, 24], 'YBN': [8, 2, 4]}))
+    pprint.pprint(kasiski_examine(message))
+    pprint.pprint(_vigenere_sub_string(1, 4, message))
+    _attack_with_key_len(2, message)
 
 
 if __name__ == '__main__':
