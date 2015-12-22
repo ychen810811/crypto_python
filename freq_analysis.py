@@ -37,15 +37,16 @@ def letter_sorted_per_freq(string):
                 if freq_letters[c] > freq_letters[letter_sorted[i]]:
                     letter_sorted.insert(i, c)
                     flag_insert = False
+                    continue
                 elif freq_letters[c] == freq_letters[letter_sorted[i]]:
                     if ETAOIN.find(c) > ETAOIN.find(letter_sorted[i]):
                         letter_sorted.insert(i, c)
                         flag_insert = False
-                    else:
-                        i += 1
-                elif i == len(letter_sorted) - 1:
+                        continue
+                if i == len(letter_sorted) - 1:
                     letter_sorted.append(c)
                     flag_insert = False
+                    continue
                 else:
                     i += 1
     return ''.join(letter_sorted)
@@ -83,15 +84,11 @@ def freq_match_score(string):
     match_score = 0
     freq_string = letter_sorted_per_freq(string)
     for c in freq_string[:6]:
-        print(c)
         if c in ETAOIN[:6]:
             match_score += 1
-            print('match_score = %s' % (match_score))
     for c in freq_string[-6:]:
-        print(c)
         if c in ETAOIN[-6:]:
             match_score += 1
-            print('match_score = %s' % (match_score))
     return match_score
 
 
