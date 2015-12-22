@@ -85,6 +85,10 @@ def _common_factors(factors):
     return factor_count
 
 
+def _tuple_1st_element(t):
+    return t[0]
+
+
 def _tuple_2nd_element(t):
     return t[1]
 
