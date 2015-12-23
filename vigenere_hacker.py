@@ -137,12 +137,12 @@ def _attack_with_key_len(key_len, cipher_text):
     for i in range(key_len):
         freq_scores = []
         sub_string = _vigenere_sub_string(i, key_len, cipher_text)
-        print(sub_string)
+        print('iter %s, sub_string: %s' % (i, sub_string[:40]))
         for c in LETTERS:
-            #freq_scores.append((c, freq_analysis.freq_match_score(vigenere_cipher.decrypt(sub_string, c))))
-            print(c + ' %%%%%%%% ' + freq_analysis.letter_sorted_per_freq(vigenere_cipher.decrypt(sub_string, c)))
+            freq_scores.append((c, freq_analysis.freq_match_score(vigenere_cipher.decrypt(sub_string, c))))
+            # print(c + ' %%%%%%%% ' + freq_analysis.letter_sorted_per_freq(vigenere_cipher.decrypt(sub_string, c)))
         freq_scores.sort(key=_tuple_2nd_element, reverse=True)
-        print(str(i) + ' #### ' + pprint.pformat(freq_scores))
+        pprint.pprint(freq_scores)
 
 
 # Below starts testing code
