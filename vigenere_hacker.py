@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+# Description: a hacker of the Vigenere Cipher based on frequency analysis
+# Date of creation: Dec 23 2015
 
 import re
 import pprint
