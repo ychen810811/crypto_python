@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # Description: This module contains some useful functions in crypto maths
-# gcd()           - Greatest Common Devisor
-# findModInverse  - Calculate mod reverse
+# gcd(a, b)             - Greatest Common Devisor of a and b
+# findModInverse(a, m)  - Calculate the a's reverse mod m
 
 
 def gcd(a, b):
