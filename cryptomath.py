@@ -1,7 +1,14 @@
+# -*- coding:utf-8 -*-
+# Description: This module contains some useful functions in crypto maths
+# gcd()           - Greatest Common Devisor
+# findModInverse  - Calculate mod reverse
+
+
 def gcd(a, b):
     while a != 0:
         a, b = b % a, a
     return b
+
 
 def findModInverse(a, m):
     if gcd(a, m) != 1:
@@ -12,6 +19,7 @@ def findModInverse(a, m):
         q = u3 // v3
         v1, v2, v3, u1, u2, u3 = (u1 - q*v1), (u2 - q*v2), (u3 - q*v3), v1, v2, v3
     return u1 % m
+
 
 if __name__ == '__main__':
     print('This is a cryptographic math library')
