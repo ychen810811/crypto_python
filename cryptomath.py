@@ -1,10 +1,12 @@
 # -*- coding:utf-8 -*-
 # Description: This module contains some useful functions in crypto maths
-# gcd(a, b)             - Greatest Common Devisor of a and b
-# findModInverse(a, m)  - Calculate the a's reverse mod m
-# isprime(a)            - Test a integer prime or not
-# sieveprime(size)      - Generate a list of primes with Eratosthenes sieve of
-#                         size
+# Pub function list:
+#   gcd(a, b)             - Greatest Common Devisor of a and b
+#   findModInverse(a, m)  - Calculate the a's reverse mod m
+#   isprime(a)            - Test a integer prime or not
+#   sieveprime(size)      - Generate a list of primes with Eratosthenes sieve
+#                           of size
+#   largeprime(size)      - Return an (extremely likely) prime of size bits
 
 import math
 import random
@@ -111,8 +113,17 @@ def sieveprime(size):
     return p
 
 
+# Returns a large prime of size bits in size
+def largeprime(size=1024):
+    while True:
+        num = random.randrange(2 ** (size - 1), 2 ** size)  # In this range a number takes size bits
+        if isprime(num):
+            return num
+
+
 if __name__ == '__main__':
     print('This is a cryptographic math library')
 
     # Testing code
     print(isprime(100000096))
+    print(largeprime(1024))
